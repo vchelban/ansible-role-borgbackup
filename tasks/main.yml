@@ -87,7 +87,7 @@
   block:
     - name: Add cron job for regular create and prune
       cron:
-        name: "borgmatic"
+        name: "borgmatic-{{ borgmatic_config_name }}"
         hour: "{{ borgmatic_cron_hour }}"
         minute: "{{ borgmatic_cron_minute }}"
         user: "root"
@@ -95,7 +95,7 @@
         job: "/usr/local/bin/borgmatic -c /etc/borgmatic/{{ borgmatic_config_name }} --create --prune"
     - name: Add cron job for infrequent checks
       cron:
-        name: "borgmatic-check"
+        name: "borgmatic-check-{{ borgmatic_config_name }}"
         day: "{{ borgmatic_cron_checks_day }}"
         hour: "{{ borgmatic_cron_checks_hour }}"
         minute: "{{ borgmatic_cron_checks_minute }}"
@@ -108,7 +108,7 @@
   block:
     - name: Add cron job for create, check and prune
       cron:
-        name: "borgmatic"
+        name: "borgmatic-{{ borgmatic_config_name }}"
         hour: "{{ borgmatic_cron_hour }}"
         minute: "{{ borgmatic_cron_minute }}"
         user: "root"
@@ -116,7 +116,7 @@
         job: "/usr/local/bin/borgmatic"
     - name: Ensure separate check cron job is absent
       cron:
-        name: "borgmatic-check"
+        name: "borgmatic-check-{{ borgmatic_config_name }}"
         state: absent
   when: not borgmatic_large_repo
 
