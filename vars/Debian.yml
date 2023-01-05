@@ -1,5 +1,6 @@
 ---
 borg_dep_packages:
+  - python3-llfuse
   - openssh-client
   - cron
 
