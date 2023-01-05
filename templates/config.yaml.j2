@@ -41,6 +41,13 @@ location:
 {% endfor %}
 {% endif %}
 
+{% if borg_patterns %}
+    patterns:
+{% for dir in borg_patterns %}
+        - '{{ dir }}'
+{% endfor %}
+{% endif %}
+
     # Exclude directories that contain a CACHEDIR.TAG file. See
     # http://www.brynosaurus.com/cachedir/spec.html for details.
     exclude_caches: true
