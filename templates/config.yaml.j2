@@ -61,6 +61,10 @@ location:
     remote_path: {{ borg_remote_path }}
 {% endif %}
 
+{% if borg_read_special is defined %}
+    read_special: {{ borg_read_special }}
+{% endif %}
+
 # Repository storage options. See
 # https://borgbackup.readthedocs.io/en/stable/usage.html#borg-create and
 # https://borgbackup.readthedocs.io/en/stable/usage/general.html#environment-variables for
