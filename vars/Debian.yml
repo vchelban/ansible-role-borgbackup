@@ -5,6 +5,7 @@ borg_dep_packages:
   - cron
 
 borg_pip_packages:
+  - libfuse-dev
   - libssl-dev
   - libacl1-dev
   - libacl1
@@ -22,3 +23,8 @@ borg_distro_packages:
 
 python_bin: python3
 pip_bin: pip3
+
+borg_dependent_python_packages:
+  - cython
+  - pkgconfig
+  - llfuse
