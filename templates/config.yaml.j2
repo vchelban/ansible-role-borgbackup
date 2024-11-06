@@ -93,7 +93,7 @@ storage:
     # Type of compression to use when creating archives. See
     # https://borgbackup.readthedocs.org/en/stable/usage.html#borg-create for details.
     # Defaults to no compression.
-    compression: auto,zstd
+    compression: {{ borg_compression|default('auto,zstd') }}
 
     # Remote network upload rate limit in kiBytes/second.
 {% if borg_remote_rate_limit %}
@@ -188,6 +188,6 @@ consistency:
 # prevent potential shell injection or privilege escalation.
 hooks:
 {% for hook in borgmatic_hooks %}
-    {{ hook }}:
-        {{ borgmatic_hooks[hook] | to_nice_yaml(indent=2) | trim | indent(8) }}
+{{ hook }}:
+{{ borgmatic_hooks[hook] | to_nice_yaml(indent=4) | indent(4, first=true) }}
 {% endfor %}

@@ -5,16 +5,29 @@
     - name: Set ssh server package name for non-Archlinux ansible_os_family
       set_fact:
         openssh_package: "openssh-server"
+        pip3_extra_args: ""
       when: ansible_os_family != "Archlinux"
 
-    - name: Set ssh server package name for Archlinux ansible_os_family
+    - name: Set ssh server package name and pip3 argument for Archlinux ansible_os_family
       set_fact:
         openssh_package: "openssh"
+        pip3_extra_args: "--break-system-packages"
       when: ansible_os_family == "Archlinux"
 
     - name: Install openssh
       package:
         name: "{{ openssh_package }}"
+        state: present
+
+    - name: Enable EPEL for yamllint
+      package:
+        name: epel-release
+        state: present
+      when: ansible_os_family == 'RedHat' and ansible_distribution != 'Fedora'
+
+    - name: Install yamllint
+      package:
+        name: yamllint
         state: present
 
   roles:
@@ -40,9 +53,3 @@
         - name: users
           hostname: database1.example.org
           port: 5433
-
-  post_tasks:
-  - name: Install yamllint for checking config file
-    pip:
-      name: yamllint
-      executable: pip3
