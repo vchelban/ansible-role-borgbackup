@@ -192,3 +192,7 @@ argument_specs:
         type: str
         required: false
         description: Name of the SSH public and private key
+      borgmatic_user_runtime_directory:
+        type: str
+        required: false
+        description: Directory where borgmatic will store its runtime files
