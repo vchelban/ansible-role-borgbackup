@@ -188,8 +188,8 @@ consistency:
 # prevent potential shell injection or privilege escalation.
 hooks:
 {% for hook in borgmatic_hooks %}
-{{ hook | indent(4, first=true) }}:
-{{ borgmatic_hooks[hook] | to_nice_yaml(indent=8) | indent(8, first=true) }}
+    {{ hook }}:
+{{ borgmatic_hooks[hook] | to_nice_yaml(indent=4) | indent(8, first=true) }}
 {% endfor %}
 
 {% if borgmatic_user_runtime_directory %}
