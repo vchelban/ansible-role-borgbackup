@@ -100,6 +100,7 @@ $ git clone https://github.com/borgbase/ansible-role-borgbackup.git roles/ansibl
 - `borg_ssh_key_name`: Name of the SSH public and pivate key. Default `id_ed25519`
 - `borg_ssh_key_file_path`: SSH-key to be used. Default `~/.ssh/{{ borg_ssh_key_name }}`
 - `borg_ssh_key_type`: The algorithm used to generate the SSH private key. Choose: `rsa`, `dsa`, `rsa1`, `ecdsa`, `ed25519`. Default: `ed25519`
+- `borg_ssh_key_comment`: Comment added to the SSH public key.
 - `borg_ssh_command`: Command to use instead of just "ssh". This can be used to specify SSH options.
 - `borg_version`: Force a specific borg version to be installed
 - `borg_venv_path`: Path to store the venv for `borg(backup)` and `borgmatic`
@@ -109,6 +110,7 @@ $ git clone https://github.com/borgbase/ansible-role-borgbackup.git roles/ansibl
 - `borgmatic_config_name`: Name to use for the Borgmatic config file. Defaults to `config.yaml`
 - `borgmatic_timer_hour`: Hour when regular create and prune cron/systemd-timer job will run. Defaults to `{{ 6 | random }}`
 - `borgmatic_timer_minute`: Minute when regular create and prune cron/systemd-timer job will run. Defaults to  `{{ 59 | random }}`
+- `borgmatic_timer_flags`: Flags to pass to borgmatic cron/systemd-timer job, like "--log-file /path/to/file.log --log-file-verbosity 2"
 - `borgmatic_hooks`: Hooks to monitor your backups e.g. with [Healthchecks](https://healthchecks.io/). See [official documentation](https://torsion.org/borgmatic/docs/how-to/monitor-your-backups/) for more.
 - `borgmatic_timer`: If the variable is set, a timer is installed. A choice must be made between `cron` and `systemd`.
 - `borgmatic_relocated_repo_access_is_ok`: Bypass Borg error about a repository that has been moved. Defaults to `false`
