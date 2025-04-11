@@ -78,6 +78,10 @@ argument_specs:
         type: list
         required: false
         description: Any paths matching these patterns are excluded from backups. Globs and tildes are expanded.
+      borg_patterns:
+        type: list
+        required: false
+        description: Any paths matching these patterns are included or excluded (using pattern prefixes + and -) from backups. Globs and tildes are expanded.
       borg_exclude_from:
         type: list
         required: false
