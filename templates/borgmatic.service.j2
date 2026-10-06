@@ -2,7 +2,7 @@
 
 [Unit]
 Description=borgmatic backup
-Wants=backup_normal_repo.timer
+Wants=borgmatic.timer
 Wants=network-online.target
 After=network-online.target
 # Prevent borgmatic from running unless the machine is plugged into power. Remove this line if you
@@ -11,8 +11,8 @@ ConditionACPower=true
 
 [Service]
 Type=oneshot
-User={{ borg_user }}
-ExecStart=borgmatic -c /etc/borgmatic/{{ borgmatic_config_name }} {{ borgmatic_timer_flags }}
+User={{ _borgbackup_user.name }}
+ExecStart=borgmatic{{ ' -c /etc/borgmatic/' ~ _borgbackup_config.name if _borgbackup_config.create | bool else '' }} {{ _borgbackup_timer.flags }}
 
 # Source: https://projects.torsion.org/borgmatic-collective/borgmatic/raw/branch/master/sample/systemd/borgmatic.service
 # Security settings for systemd running as root, optional but recommended to improve security. You
@@ -22,7 +22,7 @@ LockPersonality=true
 # Certain borgmatic features like Healthchecks integration need MemoryDenyWriteExecute to be off.
 # But you can try setting it to "yes" for improved security if you don't use those features.
 MemoryDenyWriteExecute=no
-NoNewPrivileges=yes
+NoNewPrivileges={{ _borgbackup_timer.systemd_no_new_privileges }}
 PrivateDevices=yes
 PrivateTmp=yes
 ProtectClock=yes

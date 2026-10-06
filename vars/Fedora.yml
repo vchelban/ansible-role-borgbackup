@@ -1,13 +1,10 @@
 ---
-borg_dep_packages:
+_borgbackup_dep_packages:
   - openssh-clients
 
-borg_cron_package: cronie
+_borgbackup_cron_package: cronie
 
-borg_pip_packages:
-  - fuse-devel
-  - libacl-devel
-  - libacl
+_borgbackup_pip_packages:
   - gcc
   - gcc-c++
   - libacl
@@ -23,15 +20,17 @@ borg_pip_packages:
   - python3-wheel
   - xxhash
   - xxhash-devel
+  - fuse-devel
+  - libacl-devel
+  - libacl
 
-borg_distro_packages:
+_borgbackup_distro_packages:
   - borgbackup
   - borgmatic
 
-python_bin: python3
-pip_bin: pip3
-
-borg_dependent_python_packages:
-  - cython
-  - pkgconfig
-  - llfuse
+_borgbackup_install:
+  dependent_python_packages:
+    - cython
+    - pkgconfig
+    - llfuse
+_borgbackup_python_bin: python3
